@@ -35,7 +35,7 @@ function(BuildDeb)
   add_custom_target(
     ${ARG_NAME}-${ARG_DISTRIBUTION}-debuild
     DEPENDS ${CMAKE_BINARY_DIR}/src/${ARG_DEB_SRC_DIR}/debian/changelog
-    COMMAND cd ${CMAKE_BINARY_DIR}/src && ${TAR} -acf ${ARG_NAME}_${ARG_SOURCE_VERSION}.${ARG_PPA_VERSION_NUMBER}.${ARG_DISTRIBUTION}.orig.tar.gz ${ARG_DEB_SRC_DIR} --exclude-vcs
+    COMMAND cd ${CMAKE_BINARY_DIR}/src && ${TAR} --exclude-vcs -acf ${ARG_NAME}_${ARG_SOURCE_VERSION}.${ARG_PPA_VERSION_NUMBER}.${ARG_DISTRIBUTION}.orig.tar.gz ${ARG_DEB_SRC_DIR}
     COMMAND cd ${CMAKE_BINARY_DIR}/src/${ARG_DEB_SRC_DIR} && ${DEBUILD} --no-tgz-check -i -S -sa -k${ARG_GPG_KEY_ID}
     COMMENT "Running debuild"
     OUTPUT ${CMAKE_BINARY_DIR}/src/${ARG_NAME}_${ARG_SOURCE_VERSION}.${ARG_PPA_VERSION_NUMBER}.${ARG_DISTRIBUTION}.orig.tar.gz
